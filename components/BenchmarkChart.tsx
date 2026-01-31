@@ -1,38 +1,39 @@
 /**
  * BenchmarkChart Component
  * 
- * Displays a bar chart visualization for benchmark test results, comparing
- * scores across different AI models. Highlights the winning model with a
- * trophy icon and special styling.
+ * Displays a bar chart visualization for benchmark test results.
+ * Uses a dynamic baseline to emphasize differences between close scores.
  */
 import React from 'react';
 import { BenchmarkTest, Model } from '../types';
 import { TrophyIcon, getIconForModel } from './Icons';
 
-/**
- * Props for the BenchmarkChart component
- */
 interface BenchmarkChartProps {
-  /** The benchmark test data containing results for each model */
   test: BenchmarkTest;
-  /** Array of model definitions for display and color mapping */
   models: Model[];
 }
 
-/**
- * Renders a bar chart comparing benchmark scores across AI models.
- * Automatically calculates the winner and scales the chart based on max score.
- * 
- * @param props - Component props containing test data and model definitions
- * @returns JSX.Element - The rendered benchmark chart
- */
 const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: BenchmarkChartProps) => {
-  // Find max score for scaling
-  const maxScore = Math.max(...test.results.map((r) => r.score));
-  // Round up to nearest 10 for y-axis top
-  const scaleMax = Math.ceil(maxScore / 10) * 10;
+  const scores = test.results.map((r) => r.score);
+  const maxScore = Math.max(...scores);
+  const minScore = Math.min(...scores);
   
-  // Find winner
+  // Dynamic Scaling:
+  // If the difference between max and min is small, we "zoom in"
+  // by setting the baseline closer to the minimum value.
+  const scoreSpread = maxScore - minScore;
+  let scaleMin = 0;
+
+  if (minScore > 50) {
+    // If scores are high and bunched together, start baseline 10-15% below min
+    // to make visual height differences more dramatic.
+    scaleMin = Math.floor((minScore - (scoreSpread * 1.5 || 10)) / 5) * 5;
+    if (scaleMin < 0) scaleMin = 0;
+  }
+
+  const scaleMax = Math.ceil(maxScore / 5) * 5;
+  const scaleRange = scaleMax - scaleMin;
+  
   const winner = test.results.reduce((prev, current) => 
     (prev.score > current.score) ? prev : current
   );
@@ -47,34 +48,37 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
       <div className="flex-1 w-full flex items-end justify-between gap-2 sm:gap-4 relative pt-12">
         {/* Grid lines background */}
         <div className="absolute inset-0 pointer-events-none flex flex-col justify-between text-gray-800 opacity-20 z-0 pb-20 pt-12">
-             {[0, 0.25, 0.5, 0.75, 1].map((tick) => (
-                 <div key={tick} className="w-full h-px bg-gray-700 relative">
-                     <span className="absolute -top-3 -left-0 text-[10px]">{Math.round((1 - tick) * scaleMax)}</span>
-                 </div>
-             ))}
+             {[0, 0.25, 0.5, 0.75, 1].map((tick) => {
+                 const value = scaleMax - tick * scaleRange;
+                 return (
+                     <div key={tick} className="w-full h-px bg-gray-700 relative">
+                         <span className="absolute -top-3 -left-0 text-[10px]">{Math.round(value)}</span>
+                     </div>
+                 );
+             })}
         </div>
 
         {models.map((model) => {
           const result = test.results.find(r => r.modelId === model.id);
           const score = result ? result.score : 0;
           const version = result ? result.version : '';
-          const heightPercent = (score / scaleMax) * 100;
+          
+          // Calculate height relative to the dynamic baseline
+          const heightPercent = scaleRange > 0 
+            ? Math.max(5, ((score - scaleMin) / scaleRange) * 100) 
+            : 100;
+            
           const isWinner = winner.modelId === model.id;
 
           return (
             <div key={model.id} className="group relative flex flex-col items-center justify-end h-full flex-1 z-10">
               
-              {/* Score Label (Permanent) */}
-              <div
-                className={`mb-2 font-mono text-xs sm:text-sm font-bold transition-all ${
+              <div className={`mb-2 font-mono text-xs sm:text-sm font-bold transition-all ${
                   isWinner ? 'text-gold' : 'text-gray-400 group-hover:text-white'
-                }`}
-              >
-                {score && score.toFixed(1)}
-                {!score && "NA"}
+                }`}>
+                {score ? score.toFixed(1) : "NA"}
               </div>
 
-              {/* Trophy for Winner */}
               {isWinner && (
                 <div className="absolute -top-12 animate-bounce z-20">
                   <div className="bg-gradient-to-b from-yellow-300 to-yellow-600 rounded-full p-1.5 shadow-glow">
@@ -83,7 +87,6 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
                 </div>
               )}
 
-              {/* The Bar */}
               <div
                 className={`w-full max-w-[40px] rounded-t-sm transition-all duration-700 ease-out relative ${
                   isWinner ? 'shadow-glow-sm' : 'opacity-80 hover:opacity-100'
@@ -93,11 +96,9 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
                   backgroundColor: model.color
                 }}
               >
-                {/* Glossy overlay effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent pointer-events-none"></div>
               </div>
 
-              {/* Label Area */}
               <div className="mt-4 flex flex-col items-center gap-1 h-16 w-full">
                 <div className={`p-1.5 rounded-full bg-[#222] border border-[#333] ${isWinner ? 'ring-1 ring-gold/50' : ''}`}>
                     <div className={isWinner ? 'text-gold' : 'text-gray-400'}>

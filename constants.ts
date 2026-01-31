@@ -30,44 +30,44 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
         name: 'Humanity last exam',
         description: 'Consist of questions across physics, medicine, humanities, computer science, engineering etc.',
         results: [
-            { modelId: 'chatgpt', score: 31.6, version: '5.2' },
-            { modelId: 'claude', score: 25.2, version: '3.5 Sonnet' }, 
-            { modelId: 'google', score: 37.52, version: '1.5 Pro' },
-            { modelId: 'xAI', score: 17.6, version: '3 Beta' },
-            { modelId: 'deepseek', score: 22.2, version: 'V3' },
-            { modelId: 'kimi', score: 22.3, version: 'K2 Thinking' },
-            { modelId: 'minimax', score: 22.2, version: 'M2' },
-            { modelId: 'z.ai', score: 25.1, version: 'SuperNova' },
+            { modelId: 'chatgpt', score: 31.6, version: '5.2 XHigh' },
+            { modelId: 'claude', score: 25.2, version: '4.5 Opus' }, 
+            { modelId: 'google', score: 37.52, version: '3 Pro' },
+            { modelId: 'xAI', score: 17.6, version: '4.1 fast' },
+            { modelId: 'deepseek', score: 22.2, version: 'V3.2' },
+            { modelId: 'kimi', score: 22.3, version: 'K2.5' },
+            { modelId: 'minimax', score: 22.2, version: 'M2.1' },
+            { modelId: 'z.ai', score: 25.1, version: 'GLM-4.7' },
         ]
       },
       {
         id: 'browse-comp',
         name: 'BrowseComp',
-        description: 'Test',
+        description: 'Evaluates the internet searching capability of the model.',
         results: [
-            { modelId: 'chatgpt', score: 78.2, version: '5.1' },
-            { modelId: 'claude', score: 76.5, version: '3.5 Sonnet' },
-            { modelId: 'google', score: null, version: '1.5 Pro' }, // Winner (Gemini usually good at browsing/long context)
+            { modelId: 'chatgpt', score: 65.8, version: '5.2' },
+            { modelId: 'claude', score: 57.8, version: '4.5 Opus' },
+            { modelId: 'google', score: 59.2, version: '3 Pro' }, // Winner (Gemini usually good at browsing/long context)
             { modelId: 'xAI', score: 70.1, version: '3 Beta' },
-            { modelId: 'deepseek', score: 74.5, version: 'V3' },
-            { modelId: 'kimi', score: 68.2, version: 'K2 Thinking' },
-            { modelId: 'minimax', score: 65.4, version: 'M2' },
-            { modelId: 'z.ai', score: 62.1, version: 'SuperNova' },
+            { modelId: 'deepseek', score: 67.6, version: 'V3' },
+            { modelId: 'kimi', score: 74.9, version: 'K2 Thinking' },
+            { modelId: 'minimax', score: null, version: 'M2' },
+            { modelId: 'z.ai', score: null, version: '4.7' },
         ]
       },
       {
         id: 'deepsearch-qa',
         name: 'DeepSearchQA',
-        description: 'Test',
+        description: 'Deep Research tasks that help to research extensively and present a report to the user.',
         results: [
-            { modelId: 'chatgpt', score: 85.1, version: '2025-V2' },
-            { modelId: 'claude', score: 83.2, version: '3.5 Sonnet' },
-            { modelId: 'google', score: 84.8, version: '1.5 Pro' }, 
-            { modelId: 'xAI', score: 80.5, version: '3 Beta' },
-            { modelId: 'deepseek', score: 86.2, version: 'V3' }, // Winner (DeepSeek V3 strong reasoning)
-            { modelId: 'kimi', score: 79.9, version: 'K2 Thinking' },
-            { modelId: 'minimax', score: 75.3, version: 'M2' },
-            { modelId: 'z.ai', score: 72.1, version: 'SuperNova' },
+            { modelId: 'chatgpt', score: 65.18, version: 'GPT 5 Pro Reasoning' },
+            { modelId: 'claude', score: 24.01, version: '4.5 Opus' },
+            { modelId: 'google', score: 66.09, version: 'Gemini Deep Research Agent' }, 
+            { modelId: 'xAI', score: null, version: '4' },
+            { modelId: 'deepseek', score: null, version: 'V3' }, 
+            { modelId: 'kimi', score: null, version: 'K2 Thinking' },
+            { modelId: 'minimax', score: null, version: 'M2' },
+            { modelId: 'z.ai', score: null, version: 'SuperNova' },
         ]
       }
     ]
@@ -77,90 +77,33 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
     title: 'Coding',
     tests: [
       {
-        id: 'swe-bench-verified',
-        name: 'SWE-Bench Verified',
-        description: 'Test',
+        id: 'swe-bench-pro',
+        name: 'SWE-Bench Pro (Public dataset)',
+        description: 'Realistic evaluation of AI agents for software engineering. More sophisticated from the SWE bench with harder tasks using private repos and overfitting checks ',
         results: [
-            { modelId: 'chatgpt', score: 52.1, version: '2025-V2' },
-            { modelId: 'claude', score: 56.4, version: '3.5 Sonnet' }, // Winner
-            { modelId: 'google', score: 49.8, version: '1.5 Pro' },
-            { modelId: 'xAI', score: 45.2, version: '3 Beta' },
-            { modelId: 'deepseek', score: 53.0, version: 'V3' },
-            { modelId: 'kimi', score: 48.5, version: 'K2 Thinking' },
-            { modelId: 'minimax', score: 44.1, version: 'M2' },
-            { modelId: 'z.ai', score: 42.0, version: 'SuperNova' },
+            { modelId: 'chatgpt', score: 41.78, version: '5 High' },
+            { modelId: 'claude', score: 45.89, version: 'Opus 3.5' }, // Winner
+            { modelId: 'google', score: 43.3, version: '3 Pro' },
+            { modelId: 'xAI', score: null, version: '4' },
+            { modelId: 'deepseek', score: 15.56, version: 'V3.2' },
+            { modelId: 'kimi', score: 27.67, version: 'K2 Thinking' },
+            { modelId: 'minimax', score: 36.81, version: 'M2' },
+            { modelId: 'z.ai', score: 9.67, version: 'glm-4.6' },
         ]
       },
       {
-        id: 'swe-bench-multi',
-        name: 'SWE-Bench Multilingual',
-        description: 'Test',
+        id: 'terminal-bench',
+        name: 'Terminal Bench',
+        description: 'Testing AI agents in terminals. These are coding task that function inside a terminal with TUI/CLI tools such as Factory, Codex etc.',
         results: [
-            { modelId: 'chatgpt', score: 48.2, version: '2025-V2' },
-            { modelId: 'claude', score: 49.5, version: '3.5 Sonnet' },
-            { modelId: 'google', score: 47.1, version: '1.5 Pro' },
-            { modelId: 'xAI', score: 40.2, version: '3 Beta' },
-            { modelId: 'deepseek', score: 51.2, version: 'V3' }, // Winner
-            { modelId: 'kimi', score: 49.8, version: 'K2 Thinking' }, // Strong competitor
+            { modelId: 'chatgpt', score: 60.4, version: '5.1-Codex-Max (Codex CLI)' },
+            { modelId: 'claude', score: 63.1, version: '4.5 Opus (Factory CLI)' },
+            { modelId: 'google', score: 64.7, version: '3 Pro (Ante Antigma Labs)' },
+            { modelId: 'xAI', score: 27.2, version: '4 (Openhands)' },
+            { modelId: 'deepseek', score: null, version: 'V3' }, // Winner
+            { modelId: 'kimi', score: 27.8, version: 'K2 Instruct (Terminus 2)' }, // Strong competitor
             { modelId: 'minimax', score: 45.3, version: 'M2' },
-            { modelId: 'z.ai', score: 38.9, version: 'SuperNova' },
-        ]
-      }
-    ]
-  },
-  {
-    id: 'image',
-    title: 'Image',
-    tests: [
-      {
-        id: 'mmmu-pro',
-        name: 'MMMU Pro',
-                description: 'Test',
-        results: [
-            { modelId: 'chatgpt', score: 72.1, version: '2025-V2' },
-            { modelId: 'claude', score: 68.4, version: '3.5 Sonnet' },
-            { modelId: 'google', score: 74.5, version: '1.5 Pro' }, // Winner
-            { modelId: 'xAI', score: 65.2, version: '3 Beta' },
-            { modelId: 'deepseek', score: 62.0, version: 'V3' },
-            { modelId: 'kimi', score: 58.5, version: 'K2 Thinking' },
-            { modelId: 'minimax', score: 55.1, version: 'M2' },
-            { modelId: 'z.ai', score: 52.0, version: 'SuperNova' },
-        ]
-      },
-      {
-        id: 'mathvision',
-        name: 'MathVision',
-                description: 'Test',
-        results: [
-            { modelId: 'chatgpt', score: 68.2, version: '2025-V2' },
-            { modelId: 'claude', score: 65.5, version: '3.5 Sonnet' },
-            { modelId: 'google', score: 63.1, version: '1.5 Pro' },
-            { modelId: 'xAI', score: 71.2, version: '3 Beta' }, // Winner (Grok strong at math)
-            { modelId: 'deepseek', score: 60.2, version: 'V3' },
-            { modelId: 'kimi', score: 62.8, version: 'K2 Thinking' }, 
-            { modelId: 'minimax', score: 50.3, version: 'M2' },
-            { modelId: 'z.ai', score: 48.9, version: 'SuperNova' },
-        ]
-      }
-    ]
-  },
-  {
-    id: 'video',
-    title: 'Video',
-    tests: [
-      {
-        id: 'video-mmmu',
-        name: 'VideoMMMU',
-                description: 'Test',
-        results: [
-            { modelId: 'chatgpt', score: 65.1, version: '2025-V2' },
-            { modelId: 'claude', score: 58.4, version: '3.5 Sonnet' },
-            { modelId: 'google', score: 69.5, version: '1.5 Pro' }, // Winner (Gemini video native)
-            { modelId: 'xAI', score: 55.2, version: '3 Beta' },
-            { modelId: 'deepseek', score: 42.0, version: 'V3' },
-            { modelId: 'kimi', score: 38.5, version: 'K2 Thinking' },
-            { modelId: 'minimax', score: 45.1, version: 'M2' },
-            { modelId: 'z.ai', score: 32.0, version: 'SuperNova' },
+            { modelId: 'z.ai', score: 33.4, version: 'GLM 4.7 (Terminus 2)' },
         ]
       }
     ]

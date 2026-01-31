@@ -50,12 +50,11 @@ const App: React.FC = () => {
       <header className="border-b border-border bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center font-bold text-white">N</div>
-            <h1 className="text-xl font-bold tracking-tight text-white">NEXUS <span className="text-gray-500 font-mono text-sm">BENCHMARK 2026</span></h1>
+            <h1 className="text-xl font-bold tracking-tight text-white">Ayman Benchmark Aggregator <span className="text-gray-500 font-mono text-sm">BENCHMARK 2026</span></h1>
           </div>
           <div className="flex items-center gap-4 text-xs font-mono text-gray-500">
-            <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> LIVE DATA</span>
-            <span>UPDATED: SEP 2026</span>
+            {/* <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> LIVE DATA</span> */}
+            <span>UPDATED: Feb 2026</span>
           </div>
         </div>
       </header>
@@ -89,15 +88,11 @@ const App: React.FC = () => {
             ))}
         </section>
 
-        {/* Playground Section */}
-        <section className="pt-8">
-             <Playground />
-        </section>
       </main>
 
       <footer className="border-t border-border mt-20 py-8 bg-[#050505]">
           <div className="max-w-7xl mx-auto px-4 text-center text-gray-600 text-sm font-mono">
-              NEXUS BENCHMARK 2026 © PROJECTION DASHBOARD. DATA IS SIMULATED.
+              Ayman Benchmark Aggregator
           </div>
       </footer>
     </div>
