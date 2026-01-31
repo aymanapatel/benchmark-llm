@@ -88,7 +88,7 @@ export const DefaultModelIcon = () => (
  * Returns the appropriate icon component for a given model ID
  * Maps model IDs to their corresponding provider icons
  * 
- * @param id - The model ID string (e.g., 'gpt-4o', 'claude-3-5', 'gemini-1-5')
+ * @param id - The model ID string (e.g., 'chatgpt', 'claude', 'google')
  * @returns JSX.Element - The corresponding provider icon component
  */
 export const getIconForModel = (id: string) => {

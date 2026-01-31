@@ -15,6 +15,7 @@ export interface BenchmarkResult {
 export interface BenchmarkTest {
   id: string;
   name: string;
+  description: string;
   results: BenchmarkResult[];
 }
 

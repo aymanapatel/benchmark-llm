@@ -41,6 +41,7 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }) => {
     <div className="bg-[#161616] p-6 rounded-xl border border-border flex flex-col w-full h-full min-h-[400px]">
       <div className="mb-6 flex justify-between items-center">
         <h3 className="text-xl font-bold text-gray-100">{test.name}</h3>
+        <h4 className="text-xl text-gray-600">{test.description}</h4>
         <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">Benchmark 2026</span>
       </div>
 
