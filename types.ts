@@ -9,7 +9,7 @@ export interface Model {
 
 export interface BenchmarkResult {
   modelId: string;
-  score: number;
+  score: number | null;
 }
 
 export interface BenchmarkTest {

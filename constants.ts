@@ -3,7 +3,7 @@ import { BenchmarkCategory, Model } from './types';
 // Models
 export const MODELS: Model[] = [
   // Closed Source
-  { id: 'chatgpt', name: 'GPT-4o', version: '2025-V2', provider: 'OpenAI', color: '#10a37f', type: 'closed' }, // Green
+  { id: 'chatgpt', name: 'gpt-5', version: '2025-V2', provider: 'OpenAI', color: '#10a37f', type: 'closed' }, // Green
   { id: 'claude', name: 'Claude', version: '3.5 Sonnet', provider: 'Anthropic', color: '#d97757', type: 'closed' }, // Orange
   { id: 'google', name: 'Gemini', version: '1.5 Pro', provider: 'Google', color: '#4285F4', type: 'closed' }, // Blue
   { id: 'xAI', name: 'Grok', version: '3 Beta', provider: 'xAI', color: '#ffffff', type: 'closed' }, // White
@@ -12,7 +12,7 @@ export const MODELS: Model[] = [
   { id: 'deepseek', name: 'DeepSeek', version: 'V3', provider: 'DeepSeek', color: '#3b82f6', type: 'open' }, // Blue-500
   { id: 'kimi', name: 'Kimi', version: 'K2 Thinking', provider: 'Moonshot', color: '#ec4899', type: 'open' }, // Pink
   { id: 'minimax', name: 'Minimax', version: 'M2', provider: 'Minimax', color: '#06b6d4', type: 'open' }, // Cyan
-  { id: 'arcee-supernova', name: 'Arcee', version: 'SuperNova', provider: 'Arcee', color: '#8b5cf6', type: 'open' }, // Violet
+  { id: 'z.ai', name: 'Arcee', version: 'SuperNova', provider: 'Arcee', color: '#8b5cf6', type: 'open' }, // Violet
 ];
 
 // Helper to generate a random score range for realism
@@ -27,17 +27,17 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
     tests: [
       {
         id: 'hle-full',
-        name: 'HLE-Full',
-        description: 'Test',
+        name: 'Humanity last exam',
+        description: 'Consist of questions across physics, medicine, humanities, computer science, engineering etc.',
         results: [
-            { modelId: 'chatgpt', score: 62.4 },
-            { modelId: 'claude', score: 65.1 }, // Winner
-            { modelId: 'google', score: 59.8 },
-            { modelId: 'xAI', score: 55.2 },
-            { modelId: 'deepseek', score: 60.1 },
-            { modelId: 'kimi', score: 54.5 },
-            { modelId: 'minimax', score: 51.0 },
-            { modelId: 'arcee-supernova', score: 48.9 },
+            { modelId: 'chatgpt', score: 31.6 },
+            { modelId: 'claude', score: 25.2 }, 
+            { modelId: 'google', score: 37.52 },
+            { modelId: 'xAI', score: 17.6 },
+            { modelId: 'deepseek', score: 22.2 },
+            { modelId: 'kimi', score: 22.3 },
+            { modelId: 'minimax', score: 22.2 },
+            { modelId: 'z.ai', score: 25.1 },
         ]
       },
       {
@@ -47,12 +47,12 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
         results: [
             { modelId: 'chatgpt', score: 78.2 },
             { modelId: 'claude', score: 76.5 },
-            { modelId: 'google', score: 81.3 }, // Winner (Gemini usually good at browsing/long context)
+            { modelId: 'google', score: null }, // Winner (Gemini usually good at browsing/long context)
             { modelId: 'xAI', score: 70.1 },
             { modelId: 'deepseek', score: 74.5 },
             { modelId: 'kimi', score: 68.2 },
             { modelId: 'minimax', score: 65.4 },
-            { modelId: 'arcee-supernova', score: 62.1 },
+            { modelId: 'z.ai', score: 62.1 },
         ]
       },
       {
@@ -67,7 +67,7 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
             { modelId: 'deepseek', score: 86.2 }, // Winner (DeepSeek V3 strong reasoning)
             { modelId: 'kimi', score: 79.9 },
             { modelId: 'minimax', score: 75.3 },
-            { modelId: 'arcee-supernova', score: 72.1 },
+            { modelId: 'z.ai', score: 72.1 },
         ]
       }
     ]
@@ -88,7 +88,7 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
             { modelId: 'deepseek', score: 53.0 },
             { modelId: 'kimi', score: 48.5 },
             { modelId: 'minimax', score: 44.1 },
-            { modelId: 'arcee-supernova', score: 42.0 },
+            { modelId: 'z.ai', score: 42.0 },
         ]
       },
       {
@@ -103,7 +103,7 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
             { modelId: 'deepseek', score: 51.2 }, // Winner
             { modelId: 'kimi', score: 49.8 }, // Strong competitor
             { modelId: 'minimax', score: 45.3 },
-            { modelId: 'arcee-supernova', score: 38.9 },
+            { modelId: 'z.ai', score: 38.9 },
         ]
       }
     ]
@@ -124,7 +124,7 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
             { modelId: 'deepseek', score: 62.0 },
             { modelId: 'kimi', score: 58.5 },
             { modelId: 'minimax', score: 55.1 },
-            { modelId: 'arcee-supernova', score: 52.0 },
+            { modelId: 'z.ai', score: 52.0 },
         ]
       },
       {
@@ -139,7 +139,7 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
             { modelId: 'deepseek', score: 60.2 },
             { modelId: 'kimi', score: 62.8 }, 
             { modelId: 'minimax', score: 50.3 },
-            { modelId: 'arcee-supernova', score: 48.9 },
+            { modelId: 'z.ai', score: 48.9 },
         ]
       }
     ]
@@ -160,7 +160,7 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
             { modelId: 'deepseek', score: 42.0 },
             { modelId: 'kimi', score: 38.5 },
             { modelId: 'minimax', score: 45.1 },
-            { modelId: 'arcee-supernova', score: 32.0 },
+            { modelId: 'z.ai', score: 32.0 },
         ]
       }
     ]

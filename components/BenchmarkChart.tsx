@@ -26,7 +26,7 @@ interface BenchmarkChartProps {
  * @param props - Component props containing test data and model definitions
  * @returns JSX.Element - The rendered benchmark chart
  */
-const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }) => {
+const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: BenchmarkChartProps) => {
   // Find max score for scaling
   const maxScore = Math.max(...test.results.map((r) => r.score));
   // Round up to nearest 10 for y-axis top
@@ -41,8 +41,7 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }) => {
     <div className="bg-[#161616] p-6 rounded-xl border border-border flex flex-col w-full h-full min-h-[400px]">
       <div className="mb-6 flex justify-between items-center">
         <h3 className="text-xl font-bold text-gray-100">{test.name}</h3>
-        <h4 className="text-xl text-gray-600">{test.description}</h4>
-        <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">Benchmark 2026</span>
+        <span className="text-xs font-mono text-gray-500 tracking-widest">{test.description}</span>
       </div>
 
       <div className="flex-1 w-full flex items-end justify-between gap-2 sm:gap-4 relative pt-12">
@@ -70,7 +69,8 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }) => {
                   isWinner ? 'text-gold' : 'text-gray-400 group-hover:text-white'
                 }`}
               >
-                {score.toFixed(1)}
+                {score && score.toFixed(1)}
+                {!score && "NA"}
               </div>
 
               {/* Trophy for Winner */}
