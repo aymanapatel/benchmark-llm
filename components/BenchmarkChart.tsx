@@ -57,6 +57,7 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
         {models.map((model) => {
           const result = test.results.find(r => r.modelId === model.id);
           const score = result ? result.score : 0;
+          const version = result ? result.version : '';
           const heightPercent = (score / scaleMax) * 100;
           const isWinner = winner.modelId === model.id;
 
@@ -64,7 +65,7 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
             <div key={model.id} className="group relative flex flex-col items-center justify-end h-full flex-1 z-10">
               
               {/* Score Label (Permanent) */}
-              <div 
+              <div
                 className={`mb-2 font-mono text-xs sm:text-sm font-bold transition-all ${
                   isWinner ? 'text-gold' : 'text-gray-400 group-hover:text-white'
                 }`}
@@ -83,13 +84,13 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
               )}
 
               {/* The Bar */}
-              <div 
+              <div
                 className={`w-full max-w-[40px] rounded-t-sm transition-all duration-700 ease-out relative ${
                   isWinner ? 'shadow-glow-sm' : 'opacity-80 hover:opacity-100'
                 }`}
-                style={{ 
-                  height: `${heightPercent}%`, 
-                  backgroundColor: model.color 
+                style={{
+                  height: `${heightPercent}%`,
+                  backgroundColor: model.color
                 }}
               >
                 {/* Glossy overlay effect */}
@@ -107,7 +108,7 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
                     {model.name}
                 </div>
                 <div className="text-[9px] text-gray-600 scale-90">
-                    {model.version}
+                    {version}
                 </div>
               </div>
             </div>

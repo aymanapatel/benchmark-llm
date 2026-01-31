@@ -1,7 +1,7 @@
 export interface Model {
   id: string;
   name: string;
-  version: string;
+  latestVersion: string;
   provider: string;
   color: string;
   type: 'open' | 'closed';
@@ -10,6 +10,7 @@ export interface Model {
 export interface BenchmarkResult {
   modelId: string;
   score: number | null;
+  version: string;
 }
 
 export interface BenchmarkTest {
