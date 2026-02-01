@@ -34,9 +34,12 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
   const scaleMax = Math.ceil(maxScore / 5) * 5;
   const scaleRange = scaleMax - scaleMin;
   
-  const winner = test.results.reduce((prev, current) => 
-    (prev.score > current.score) ? prev : current
-  );
+  const winner = test.results.reduce((prev, current) => {
+    if (test.lowerIsBetter) {
+      return (prev.score < current.score) ? prev : current;
+    }
+    return (prev.score > current.score) ? prev : current;
+  });
 
   // Filter and group models by origin
   const usaModels = models.filter(m => m.origin === 'USA');

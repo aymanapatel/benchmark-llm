@@ -4,7 +4,7 @@ import BenchmarkChart from './components/BenchmarkChart';
 import Leaderboard from './components/Leaderboard';
 import Playground from './components/Playground';
 import { MedalCount, CountryMedalCount } from './types';
-import { Activity, Book, Cpu, Image } from 'lucide-react';
+import { Activity, Book, Cpu, DollarSign, Image } from 'lucide-react';
 
 const App: React.FC = () => {
   // Calculate Medals (Wins)
@@ -18,8 +18,13 @@ const App: React.FC = () => {
 
     BENCHMARK_DATA.forEach(cat => {
       cat.tests.forEach(test => {
-        // Find winner of test
-        const winner = test.results.reduce((prev, curr) => (prev.score > curr.score ? prev : curr));
+        // Find winner of test (higher is better by default, lower is better for price)
+        const winner = test.results.reduce((prev, curr) => {
+          if (test.lowerIsBetter) {
+            return (prev.score < curr.score) ? prev : curr;
+          }
+          return (prev.score > curr.score) ? prev : curr;
+        });
         if (counts[winner.modelId]) {
           counts[winner.modelId].gold += 1;
         }
@@ -56,6 +61,7 @@ const App: React.FC = () => {
         case 'coding': return <Cpu className="w-5 h-5" />;
         case 'knowledge': return <Book className="w-5 h-5" />;
         case 'visual-language': return <Image className="w-5 h-5" />;
+        case 'price': return <DollarSign className="w-5 h-5" />;
         default: return <Activity className="w-5 h-5" />;
     }
   }
@@ -83,7 +89,72 @@ const App: React.FC = () => {
             <h2 className="text-2xl font-bold text-white">Global Leaderboard</h2>
             <div className="text-sm text-gray-500">Ranked by Total Gold Medals</div>
           </div>
-          <Leaderboard medals={medals} models={MODELS} countryMedals={countryMedals} />
+          
+          {/* Country Totals */}
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            {countryMedals.sort((a, b) => b.gold - a.gold).map((country, index) => {
+              const isFirst = index === 0;
+              const countryFlag = country.origin === 'USA' ? '🇺🇸' : '🇨🇳';
+              
+              return (
+                <div 
+                  key={country.origin}
+                  className={`relative p-4 rounded-xl border flex items-center gap-4 overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
+                    isFirst 
+                      ? 'bg-gradient-to-br from-[#161616] to-[#221f00] border-gold/30 shadow-glow-sm' 
+                      : 'bg-[#161616] border-border hover:border-gray-600'
+                  }`}
+                >
+                  <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-[#222] border border-[#333] text-2xl">
+                    {countryFlag}
+                  </div>
+
+                  <div className="relative z-10 flex-1">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h4 className="font-bold text-gray-100 text-lg">{country.origin}</h4>
+                        <span className="text-xs text-gray-500 font-mono">Total Wins</span>
+                      </div>
+                      {isFirst && <span className="text-gold text-xl">🏆</span>}
+                    </div>
+                    
+                    <div className="mt-2 flex items-center gap-2">
+                      <div className="flex items-center gap-1 bg-yellow-500/10 px-3 py-1 rounded text-yellow-500 text-sm font-bold border border-yellow-500/20">
+                        {country.gold} Wins
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Segregated Leaderboards */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* USA Leaderboard */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-3xl">🇺🇸</span>
+                <h3 className="text-2xl font-bold text-white">USA Models</h3>
+              </div>
+              <Leaderboard 
+                medals={medals.filter(m => MODELS.find(model => model.id === m.modelId)?.origin === 'USA')} 
+                models={MODELS.filter(m => m.origin === 'USA')} 
+              />
+            </div>
+
+            {/* Chinese Leaderboard */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-3xl">🇨🇳</span>
+                <h3 className="text-2xl font-bold text-white">Chinese Models</h3>
+              </div>
+              <Leaderboard 
+                medals={medals.filter(m => MODELS.find(model => model.id === m.modelId)?.origin === 'Chinese')} 
+                models={MODELS.filter(m => m.origin === 'Chinese')} 
+              />
+            </div>
+          </div>
         </section>
 
         {/* Benchmarks Section */}

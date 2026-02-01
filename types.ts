@@ -19,6 +19,7 @@ export interface BenchmarkTest {
   name: string;
   description: string;
   results: BenchmarkResult[];
+  lowerIsBetter?: boolean;
 }
 
 export interface BenchmarkCategory {

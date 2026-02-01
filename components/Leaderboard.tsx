@@ -16,8 +16,8 @@ interface LeaderboardProps {
   medals: MedalCount[];
   /** Array of model definitions for display information */
   models: Model[];
-  /** Array of country medal counts */
-  countryMedals: CountryMedalCount[];
+  /** Array of country medal counts (optional) */
+  countryMedals?: CountryMedalCount[];
 }
 
 /**
@@ -31,53 +31,52 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ medals, models, countryMedals
   // Sort by gold medals desc
   const sortedMedals = [...medals].sort((a, b) => b.gold - a.gold);
 
-  // Sort country medals by gold
-  const sortedCountryMedals = [...countryMedals].sort((a, b) => b.gold - a.gold);
-
   return (
     <div className="space-y-6">
       {/* Country Leaderboard */}
-      <div className="grid grid-cols-2 gap-4">
-        {sortedCountryMedals.map((country, index) => {
-          const isFirst = index === 0;
-          const countryFlag = country.origin === 'USA' ? '🇺🇸' : '🇨🇳';
-          
-          return (
-            <div 
-              key={country.origin}
-              className={`relative p-4 rounded-xl border flex items-center gap-4 overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
-                isFirst 
-                  ? 'bg-gradient-to-br from-[#161616] to-[#221f00] border-gold/30 shadow-glow-sm' 
-                  : 'bg-[#161616] border-border hover:border-gray-600'
-              }`}
-            >
-              <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-[#222] border border-[#333] text-2xl">
-                {countryFlag}
-              </div>
+      {countryMedals && countryMedals.length > 0 && (
+        <div className="grid grid-cols-2 gap-4">
+          {[...countryMedals].sort((a, b) => b.gold - a.gold).map((country, index) => {
+            const isFirst = index === 0;
+            const countryFlag = country.origin === 'USA' ? '🇺🇸' : '🇨🇳';
+            
+            return (
+              <div 
+                key={country.origin}
+                className={`relative p-4 rounded-xl border flex items-center gap-4 overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
+                  isFirst 
+                    ? 'bg-gradient-to-br from-[#161616] to-[#221f00] border-gold/30 shadow-glow-sm' 
+                    : 'bg-[#161616] border-border hover:border-gray-600'
+                }`}
+              >
+                <div className="relative z-10 flex items-center justify-center w-12 h-12 rounded-full bg-[#222] border border-[#333] text-2xl">
+                  {countryFlag}
+                </div>
 
-              <div className="relative z-10 flex-1">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h4 className="font-bold text-gray-100 text-sm">{country.origin}</h4>
-                    <span className="text-[10px] text-gray-500 font-mono">Total Wins</span>
+                <div className="relative z-10 flex-1">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h4 className="font-bold text-gray-100 text-sm">{country.origin}</h4>
+                      <span className="text-[10px] text-gray-500 font-mono">Total Wins</span>
+                    </div>
+                    {isFirst && <TrophyIcon className="w-5 h-5 text-gold animate-pulse" />}
                   </div>
-                  {isFirst && <TrophyIcon className="w-5 h-5 text-gold animate-pulse" />}
-                </div>
-                
-                <div className="mt-2 flex items-center gap-2">
-                  <div className="flex items-center gap-1 bg-yellow-500/10 px-2 py-0.5 rounded text-yellow-500 text-xs font-bold border border-yellow-500/20">
-                    <TrophyIcon className="w-3 h-3" />
-                    {country.gold} Wins
+                  
+                  <div className="mt-2 flex items-center gap-2">
+                    <div className="flex items-center gap-1 bg-yellow-500/10 px-2 py-0.5 rounded text-yellow-500 text-xs font-bold border border-yellow-500/20">
+                      <TrophyIcon className="w-3 h-3" />
+                      {country.gold} Wins
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Model Leaderboard */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-4">
       {sortedMedals.map((medal, index) => {
         const model = models.find(m => m.id === medal.modelId);
         if (!model) return null;

@@ -30,7 +30,7 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
         results: [
             { modelId: 'chatgpt', score: 65.8, version: '5.2' },
             { modelId: 'claude', score: 57.8, version: '4.5 Opus' },
-            { modelId: 'google', score: 59.2, version: '3 Pro' }, // Winner (Gemini usually good at browsing/long context)
+            { modelId: 'google', score: 59.2, version: '3 Pro' },
             { modelId: 'xAI', score: 70.1, version: '3 Beta' },
             { modelId: 'deepseek', score: 67.6, version: 'V3' },
             { modelId: 'kimi', score: 74.9, version: 'K2 Thinking' },
@@ -77,16 +77,16 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
       {
         id: 'gpqa',
         name: 'GPQA diamond',
-        description: '',
+        description: 'Multiple choice questions with questions in STEM. Questions are written by PHD candidate in relevant fields.',
         results: [
-            { modelId: 'chatgpt', score: null, version: '5.2 XHigh' },
-            { modelId: 'claude', score: null, version: '4.5 Opus' }, 
-            { modelId: 'google', score: null, version: '3 Pro' },
-            { modelId: 'xAI', score: null, version: '4.1 fast' },
-            { modelId: 'deepseek', score: null, version: 'V3.2' },
-            { modelId: 'kimi', score: null, version: 'K2.5' },
-            { modelId: 'minimax', score: null, version: 'M2.1' },
-            { modelId: 'z.ai', score: null, version: 'GLM-4.7' },
+            { modelId: 'chatgpt', score: 90.3, version: '5.2 XHigh' },
+            { modelId: 'claude', score: 86.6, version: '4.5 Opus' }, 
+            { modelId: 'google', score: 90.8, version: '3 Pro' },
+            { modelId: 'xAI', score: 87.7, version: '4' },
+            { modelId: 'deepseek', score: 84, version: 'V3.2' },
+            { modelId: 'kimi', score: 87.9, version: 'K2.5' },
+            { modelId: 'minimax', score: 83, version: 'M2.1' },
+            { modelId: 'z.ai', score: 85.9, version: 'GLM-4.7' },
         ]
       }
     ]
@@ -101,7 +101,7 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
         description: 'Realistic evaluation of AI agents for software engineering. More sophisticated from the SWE bench with harder tasks using private repos and overfitting checks ',
         results: [
             { modelId: 'chatgpt', score: 41.78, version: '5 High' },
-            { modelId: 'claude', score: 45.89, version: 'Opus 3.5' }, // Winner
+            { modelId: 'claude', score: 45.89, version: 'Opus 3.5' }, 
             { modelId: 'google', score: 43.3, version: '3 Pro' },
             { modelId: 'xAI', score: null, version: '4' },
             { modelId: 'deepseek', score: 15.56, version: 'V3.2' },
@@ -119,46 +119,68 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
             { modelId: 'claude', score: 63.1, version: '4.5 Opus (Factory CLI)' },
             { modelId: 'google', score: 64.7, version: '3 Pro (Ante Antigma Labs)' },
             { modelId: 'xAI', score: 27.2, version: '4 (Openhands)' },
-            { modelId: 'deepseek', score: null, version: 'V3' }, // Winner
-            { modelId: 'kimi', score: 27.8, version: 'K2 Instruct (Terminus 2)' }, // Strong competitor
+            { modelId: 'deepseek', score: null, version: 'V3' }, 
+            { modelId: 'kimi', score: 27.8, version: 'K2 Instruct (Terminus 2)' }, 
             { modelId: 'minimax', score: 45.3, version: 'M2' },
             { modelId: 'z.ai', score: 33.4, version: 'GLM 4.7 (Terminus 2)' },
         ]
       }
     ]
   },
-      {
+  {
     id: 'visual-language',
     title: 'Visual and Language Reasoning',
     tests: [
       {
         id: 'mmlu-pro',
         name: 'MMLU Pro',
-        description: '',
+        description: '12k questions for 14 subject areas. These are graduate level questions, hence it requires reasoning to get the correct answer.',
         results: [
-            { modelId: 'chatgpt', score: null, version: '5.2 XHigh' },
-            { modelId: 'claude', score: null, version: '4.5 Opus' }, 
-            { modelId: 'google', score: null, version: '3 Pro' },
-            { modelId: 'xAI', score: null, version: '4.1 fast' },
-            { modelId: 'deepseek', score: null, version: 'V3.2' },
-            { modelId: 'kimi', score: null, version: 'K2.5' },
-            { modelId: 'minimax', score: null, version: 'M2.1' },
-            { modelId: 'z.ai', score: null, version: 'GLM-4.7' },
+            { modelId: 'chatgpt', score: 87.4, version: '5.2 XHigh' },
+            { modelId: 'claude', score: 89.5, version: '4.5 Opus' }, 
+            { modelId: 'google', score: 89.8, version: '3 Pro' },
+            { modelId: 'xAI', score: 85.4, version: '4.1 fast' },
+            { modelId: 'deepseek', score: 86.2, version: 'V3.2' },
+            { modelId: 'kimi', score: 84.8, version: 'K2.5' },
+            { modelId: 'minimax', score: 87.5, version: 'M2.1' },
+            { modelId: 'z.ai', score: 85.6, version: 'GLM-4.7' },
         ]
       },
       {
         id: 'mmmu-pro',
         name: 'MMMU Pro',
-        description: '',
+        description: 'Similar to MMMU but with both visual and textual questions',
         results: [
-            { modelId: 'chatgpt', score: null, version: '5.2 XHigh' },
-            { modelId: 'claude', score: null, version: '4.5 Opus' }, 
-            { modelId: 'google', score: null, version: '3 Pro' },
-            { modelId: 'xAI', score: null, version: '4.1 fast' },
+            { modelId: 'chatgpt', score: 76, version: '5.2 Codex' },
+            { modelId: 'claude', score: 65, version: '4.5 Opus' }, 
+            { modelId: 'google', score: 80, version: '3 Pro' },
+            { modelId: 'xAI', score: 69, version: '4' },
             { modelId: 'deepseek', score: null, version: 'V3.2' },
-            { modelId: 'kimi', score: null, version: 'K2.5' },
+            { modelId: 'kimi', score: 75, version: 'K2.5' },
             { modelId: 'minimax', score: null, version: 'M2.1' },
-            { modelId: 'z.ai', score: null, version: 'GLM-4.7' },
+            { modelId: 'z.ai', score: 49, version: 'GLM-4.6 V' },
+        ]
+      }
+    ]
+  },
+    {
+    id: 'price',
+    title: 'Pricing',
+    tests: [
+      {
+        id: 'output-price',
+        name: 'Output price: USD per 1Million token (Lower is better)',
+        description: 'Cheap price wins!',
+        lowerIsBetter: true,
+        results: [
+            { modelId: 'chatgpt', score: 14, version: '5.2 XHigh' },
+            { modelId: 'claude', score: 25, version: '4.5 Opus' }, 
+            { modelId: 'google', score: 12, version: '3 Pro' },
+            { modelId: 'xAI', score: 15, version: '4.1' },
+            { modelId: 'deepseek', score: 0.42, version: 'V3.2' },
+            { modelId: 'kimi', score: 2.5, version: 'K2.5' },
+            { modelId: 'minimax', score: 1.2, version: 'M2.1' },
+            { modelId: 'z.ai', score: 2.1, version: 'GLM-4.7' },
         ]
       }
     ]
