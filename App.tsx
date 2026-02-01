@@ -3,8 +3,8 @@ import { MODELS, BENCHMARK_DATA } from './constants';
 import BenchmarkChart from './components/BenchmarkChart';
 import Leaderboard from './components/Leaderboard';
 import Playground from './components/Playground';
-import { MedalCount } from './types';
-import { Activity, Cpu, Image, Video } from 'lucide-react';
+import { MedalCount, CountryMedalCount } from './types';
+import { Activity, Book, Cpu, Image } from 'lucide-react';
 
 const App: React.FC = () => {
   // Calculate Medals (Wins)
@@ -34,12 +34,28 @@ const App: React.FC = () => {
     return Object.values(counts);
   }, []);
 
+  // Calculate country totals
+  const countryMedals: CountryMedalCount[] = useMemo(() => {
+    const usaTotal = medals
+      .filter(m => MODELS.find(model => model.id === m.modelId)?.origin === 'USA')
+      .reduce((sum, m) => sum + m.gold, 0);
+    
+    const chineseTotal = medals
+      .filter(m => MODELS.find(model => model.id === m.modelId)?.origin === 'Chinese')
+      .reduce((sum, m) => sum + m.gold, 0);
+
+    return [
+      { origin: 'USA', gold: usaTotal },
+      { origin: 'Chinese', gold: chineseTotal }
+    ];
+  }, [medals]);
+
   const getCategoryIcon = (id: string) => {
     switch(id) {
         case 'agents': return <Activity className="w-5 h-5" />;
         case 'coding': return <Cpu className="w-5 h-5" />;
-        case 'image': return <Image className="w-5 h-5" />;
-        case 'video': return <Video className="w-5 h-5" />;
+        case 'knowledge': return <Book className="w-5 h-5" />;
+        case 'visual-language': return <Image className="w-5 h-5" />;
         default: return <Activity className="w-5 h-5" />;
     }
   }
@@ -50,7 +66,7 @@ const App: React.FC = () => {
       <header className="border-b border-border bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold tracking-tight text-white">Ayman Benchmark Aggregator <span className="text-gray-500 font-mono text-sm">BENCHMARK 2026</span></h1>
+            <h1 className="text-xl font-bold tracking-tight text-white">Ayman Benchmark Aggregator <span className="text-gray-500 font-mono text-sm">benchmark aggregator</span></h1>
           </div>
           <div className="flex items-center gap-4 text-xs font-mono text-gray-500">
             {/* <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> LIVE DATA</span> */}
@@ -67,7 +83,7 @@ const App: React.FC = () => {
             <h2 className="text-2xl font-bold text-white">Global Leaderboard</h2>
             <div className="text-sm text-gray-500">Ranked by Total Gold Medals</div>
           </div>
-          <Leaderboard medals={medals} models={MODELS} />
+          <Leaderboard medals={medals} models={MODELS} countryMedals={countryMedals} />
         </section>
 
         {/* Benchmarks Section */}

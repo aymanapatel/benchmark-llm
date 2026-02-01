@@ -2,21 +2,19 @@ import { BenchmarkCategory, Model } from './types';
 
 // Models
 export const MODELS: Model[] = [
-  // Closed Source
-  { id: 'chatgpt', name: 'ChatGPT', latestVersion: '2025-V2', provider: 'OpenAI', color: '#10a37f', type: 'closed' }, // Green
-  { id: 'claude', name: 'Claude', latestVersion: '3.5 Sonnet', provider: 'Anthropic', color: '#d97757', type: 'closed' }, // Orange
-  { id: 'google', name: 'Gemini', latestVersion: '1.5 Pro', provider: 'Google', color: '#4285F4', type: 'closed' }, // Blue
-  { id: 'xAI', name: 'Grok', latestVersion: '3 Beta', provider: 'xAI', color: '#ffffff', type: 'closed' }, // White
+  // Closed Source - USA
+  { id: 'chatgpt', name: 'ChatGPT', latestVersion: '2025-V2', provider: 'OpenAI', color: '#10a37f', type: 'closed', origin: 'USA' }, // Green
+  { id: 'claude', name: 'Claude', latestVersion: '3.5 Sonnet', provider: 'Anthropic', color: '#d97757', type: 'closed', origin: 'USA' }, // Orange
+  { id: 'google', name: 'Gemini', latestVersion: '1.5 Pro', provider: 'Google', color: '#4285F4', type: 'closed', origin: 'USA' }, // Blue
+  { id: 'xAI', name: 'Grok', latestVersion: '3 Beta', provider: 'xAI', color: '#ffffff', type: 'closed', origin: 'USA' }, // White
 
-  // Open Weight
-  { id: 'deepseek', name: 'DeepSeek', latestVersion: 'V3', provider: 'DeepSeek', color: '#3b82f6', type: 'open' }, // Blue-500
-  { id: 'kimi', name: 'Kimi', latestVersion: 'K2 Thinking', provider: 'Moonshot', color: '#ec4899', type: 'open' }, // Pink
-  { id: 'minimax', name: 'Minimax', latestVersion: 'M2', provider: 'Minimax', color: '#06b6d4', type: 'open' }, // Cyan
-  { id: 'z.ai', name: 'Arcee', latestVersion: 'SuperNova', provider: 'Arcee', color: '#8b5cf6', type: 'open' }, // Violet
+  // Open Weight - Chinese
+  { id: 'deepseek', name: 'DeepSeek', latestVersion: 'V3', provider: 'DeepSeek', color: '#3b82f6', type: 'open', origin: 'Chinese' }, // Blue-500
+  { id: 'kimi', name: 'Kimi', latestVersion: 'K2 Thinking', provider: 'Moonshot', color: '#ec4899', type: 'open', origin: 'Chinese' }, // Pink
+  { id: 'minimax', name: 'Minimax', latestVersion: 'M2', provider: 'Minimax', color: '#06b6d4', type: 'open', origin: 'Chinese' }, // Cyan
+  { id: 'z.ai', name: 'Z.ai', latestVersion: 'GLM 4.7', provider: 'Z.AI', color: '#8b5cf6', type: 'open', origin: 'Chinese' }, // Violet
 ];
 
-// Helper to generate a random score range for realism
-const s = (min: number, max: number) => Number((Math.random() * (max - min) + min).toFixed(1));
 
 // Hardcoded somewhat realistic futuristic stats
 // We ensure winners vary slightly to make the dashboard interesting.
@@ -25,21 +23,6 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
     id: 'agents',
     title: 'Agents',
     tests: [
-      {
-        id: 'hle-full',
-        name: 'Humanity last exam',
-        description: 'Consist of questions across physics, medicine, humanities, computer science, engineering etc.',
-        results: [
-            { modelId: 'chatgpt', score: 31.6, version: '5.2 XHigh' },
-            { modelId: 'claude', score: 25.2, version: '4.5 Opus' }, 
-            { modelId: 'google', score: 37.52, version: '3 Pro' },
-            { modelId: 'xAI', score: 17.6, version: '4.1 fast' },
-            { modelId: 'deepseek', score: 22.2, version: 'V3.2' },
-            { modelId: 'kimi', score: 22.3, version: 'K2.5' },
-            { modelId: 'minimax', score: 22.2, version: 'M2.1' },
-            { modelId: 'z.ai', score: 25.1, version: 'GLM-4.7' },
-        ]
-      },
       {
         id: 'browse-comp',
         name: 'BrowseComp',
@@ -62,12 +45,48 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
         results: [
             { modelId: 'chatgpt', score: 65.18, version: 'GPT 5 Pro Reasoning' },
             { modelId: 'claude', score: 24.01, version: '4.5 Opus' },
-            { modelId: 'google', score: 66.09, version: 'Gemini Deep Research Agent' }, 
+            { modelId: 'google', score: 66.09, version: 'Deep Research Agent' }, 
             { modelId: 'xAI', score: null, version: '4' },
             { modelId: 'deepseek', score: null, version: 'V3' }, 
             { modelId: 'kimi', score: null, version: 'K2 Thinking' },
             { modelId: 'minimax', score: null, version: 'M2' },
             { modelId: 'z.ai', score: null, version: 'SuperNova' },
+        ]
+      }
+    ]
+  },
+    {
+    id: 'knowledge',
+    title: 'Knowledge',
+    tests: [
+      {
+        id: 'hle-full',
+        name: 'Humanity last exam',
+        description: 'Consist of questions across physics, medicine, humanities, computer science, engineering etc.',
+        results: [
+            { modelId: 'chatgpt', score: 31.6, version: '5.2 XHigh' },
+            { modelId: 'claude', score: 25.2, version: '4.5 Opus' }, 
+            { modelId: 'google', score: 37.52, version: '3 Pro' },
+            { modelId: 'xAI', score: 17.6, version: '4.1 fast' },
+            { modelId: 'deepseek', score: 22.2, version: 'V3.2' },
+            { modelId: 'kimi', score: 22.3, version: 'K2.5' },
+            { modelId: 'minimax', score: 22.2, version: 'M2.1' },
+            { modelId: 'z.ai', score: 25.1, version: 'GLM-4.7' },
+        ]
+      },
+      {
+        id: 'gpqa',
+        name: 'GPQA diamond',
+        description: '',
+        results: [
+            { modelId: 'chatgpt', score: null, version: '5.2 XHigh' },
+            { modelId: 'claude', score: null, version: '4.5 Opus' }, 
+            { modelId: 'google', score: null, version: '3 Pro' },
+            { modelId: 'xAI', score: null, version: '4.1 fast' },
+            { modelId: 'deepseek', score: null, version: 'V3.2' },
+            { modelId: 'kimi', score: null, version: 'K2.5' },
+            { modelId: 'minimax', score: null, version: 'M2.1' },
+            { modelId: 'z.ai', score: null, version: 'GLM-4.7' },
         ]
       }
     ]
@@ -107,5 +126,41 @@ export const BENCHMARK_DATA: BenchmarkCategory[] = [
         ]
       }
     ]
-  }
+  },
+      {
+    id: 'visual-language',
+    title: 'Visual and Language Reasoning',
+    tests: [
+      {
+        id: 'mmlu-pro',
+        name: 'MMLU Pro',
+        description: '',
+        results: [
+            { modelId: 'chatgpt', score: null, version: '5.2 XHigh' },
+            { modelId: 'claude', score: null, version: '4.5 Opus' }, 
+            { modelId: 'google', score: null, version: '3 Pro' },
+            { modelId: 'xAI', score: null, version: '4.1 fast' },
+            { modelId: 'deepseek', score: null, version: 'V3.2' },
+            { modelId: 'kimi', score: null, version: 'K2.5' },
+            { modelId: 'minimax', score: null, version: 'M2.1' },
+            { modelId: 'z.ai', score: null, version: 'GLM-4.7' },
+        ]
+      },
+      {
+        id: 'mmmu-pro',
+        name: 'MMMU Pro',
+        description: '',
+        results: [
+            { modelId: 'chatgpt', score: null, version: '5.2 XHigh' },
+            { modelId: 'claude', score: null, version: '4.5 Opus' }, 
+            { modelId: 'google', score: null, version: '3 Pro' },
+            { modelId: 'xAI', score: null, version: '4.1 fast' },
+            { modelId: 'deepseek', score: null, version: 'V3.2' },
+            { modelId: 'kimi', score: null, version: 'K2.5' },
+            { modelId: 'minimax', score: null, version: 'M2.1' },
+            { modelId: 'z.ai', score: null, version: 'GLM-4.7' },
+        ]
+      }
+    ]
+  },
 ];

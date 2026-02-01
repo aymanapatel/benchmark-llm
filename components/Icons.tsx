@@ -71,6 +71,10 @@ export const MinimaxIcon = () => (
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490.16 411.7" width="25" height="25"><defs><linearGradient id="logo-gradient" y1="205.85" x2="490.16" y2="205.85" gradientUnits="userSpaceOnUse"><stop offset="0" stopColor="#e4177f"/><stop offset="0.5" stopColor="#e73562"/><stop offset="1" stopColor="#e94e4a"/></linearGradient></defs><g id="Layer_2"><g id="Layer_1-2"><path fill="url(#logo-gradient)" d="M233.45,40.81a17.55,17.55,0,1,0-35.1,0V331.56a40.82,40.82,0,0,1-81.63,0V145a17.55,17.55,0,1,0-35.09,0v79.06a40.82,40.82,0,0,1-81.63,0V195.42a11.63,11.63,0,0,1,23.26,0v28.66a17.55,17.55,0,0,0,35.1,0V145A40.82,40.82,0,0,1,140,145V331.56a17.55,17.55,0,0,0,35.1,0V217.5h0V40.81a40.81,40.81,0,1,1,81.62,0V281.56a11.63,11.63,0,1,1-23.26,0Zm215.9,63.4A40.86,40.86,0,0,0,408.53,145V300.85a17.55,17.55,0,0,1-35.09,0v-260a40.82,40.82,0,0,0-81.63,0V370.89a17.55,17.55,0,0,1-35.1,0V330a11.63,11.63,0,1,0-23.26,0v40.86a40.81,40.81,0,0,0,81.62,0V40.81a17.55,17.55,0,0,1,35.1,0v260a40.82,40.82,0,0,0,81.63,0V145a17.55,17.55,0,1,1,35.1,0V281.56a11.63,11.63,0,0,0,23.26,0V145A40.85,40.85,0,0,0,449.35,104.21Z"/></g></g></svg>
 );
 
+export const ZaiIcon = () => (
+<svg viewBox="0 0 24 24" fill="currentColor" width="25" height="25" xmlns="http://www.w3.org/2000/svg"><title>Z.ai</title><path d="M12.105 2L9.927 4.953H.653L2.83 2h9.276zM23.254 19.048L21.078 22h-9.242l2.174-2.952h9.244zM24 2L9.264 22H0L14.736 2H24z" fillRule="evenodd" /></svg>  
+);
+
 /**
  * Default model icon used when no specific provider icon is available
  * @returns JSX.Element - SVG default model icon
@@ -97,5 +101,6 @@ export const getIconForModel = (id: string) => {
   if (id.includes('deepseek')) return <DeepSeekIcon />;
   if (id.includes('kimi')) return <KimiIcon />;
   if (id.includes('minimax')) return <MinimaxIcon />;
+  if (id.includes('z.ai')) return <ZaiIcon />;
   return <DefaultModelIcon />;
 };

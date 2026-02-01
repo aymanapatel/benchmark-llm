@@ -38,27 +38,18 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
     (prev.score > current.score) ? prev : current
   );
 
-  return (
-    <div className="bg-[#161616] p-6 rounded-xl border border-border flex flex-col w-full h-full min-h-[400px]">
-      <div className="mb-6 flex justify-between items-center">
-        <h3 className="text-xl font-bold text-gray-100">{test.name}</h3>
-        <span className="text-xs font-mono text-gray-500 tracking-widest">{test.description}</span>
+  // Filter and group models by origin
+  const usaModels = models.filter(m => m.origin === 'USA');
+  const chineseModels = models.filter(m => m.origin === 'Chinese');
+
+  const renderModelGroup = (groupModels: Model[], groupLabel: string, labelColor: string) => (
+    <div className="flex flex-col flex-1">
+      {/* Subbox Label */}
+      <div className={`mb-3 px-3 py-1 rounded-md text-xs font-bold tracking-wider text-center ${labelColor}`}>
+        {groupLabel}
       </div>
-
-      <div className="flex-1 w-full flex items-end justify-between gap-2 sm:gap-4 relative pt-12">
-        {/* Grid lines background */}
-        <div className="absolute inset-0 pointer-events-none flex flex-col justify-between text-gray-800 opacity-20 z-0 pb-20 pt-12">
-             {[0, 0.25, 0.5, 0.75, 1].map((tick) => {
-                 const value = scaleMax - tick * scaleRange;
-                 return (
-                     <div key={tick} className="w-full h-px bg-gray-700 relative">
-                         <span className="absolute -top-3 -left-0 text-[10px]">{Math.round(value)}</span>
-                     </div>
-                 );
-             })}
-        </div>
-
-        {models.map((model) => {
+      <div className="flex items-end justify-between gap-2 sm:gap-4 flex-1">
+        {groupModels.map((model) => {
           const result = test.results.find(r => r.modelId === model.id);
           const score = result ? result.score : 0;
           const version = result ? result.version : '';
@@ -115,6 +106,38 @@ const BenchmarkChart: React.FC<BenchmarkChartProps> = ({ test, models }: Benchma
             </div>
           );
         })}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="bg-[#161616] pt-6 pb-10 pl-6 pr-6 rounded-xl border border-border flex flex-col w-full h-full min-h-[400px]">
+      <div className="mb-6 flex justify-between items-center">
+        <h3 className="text-xl font-bold text-gray-100">{test.name}</h3>
+        <span className="text-xs font-mono text-gray-500 tracking-widest">{test.description}</span>
+      </div>
+
+      <div className="flex-1 w-full flex gap-6 relative pt-12">
+        {/* Grid lines background */}
+        <div className="absolute inset-0 pointer-events-none flex flex-col justify-between text-gray-800 opacity-20 z-0 pb-20 pt-12">
+             {[0, 0.25, 0.5, 0.75, 1].map((tick) => {
+                 const value = scaleMax - tick * scaleRange;
+                 return (
+                     <div key={tick} className="w-full h-px bg-gray-700 relative">
+                         <span className="absolute -top-3 -left-0 text-[10px]">{Math.round(value)}</span>
+                     </div>
+                 );
+             })}
+        </div>
+
+        {/* USA Models Subbox */}
+        {renderModelGroup(usaModels, 'USA', 'bg-blue-500/20 text-blue-400 border border-blue-500/30')}
+        
+        {/* Divider */}
+        <div className="w-px bg-gray-800 self-stretch my-4"></div>
+        
+        {/* Chinese Models Subbox */}
+        {renderModelGroup(chineseModels, 'CHINESE', 'bg-red-500/20 text-red-400 border border-red-500/30')}
       </div>
     </div>
   );

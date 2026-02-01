@@ -5,6 +5,7 @@ export interface Model {
   provider: string;
   color: string;
   type: 'open' | 'closed';
+  origin: 'USA' | 'Chinese';
 }
 
 export interface BenchmarkResult {
@@ -30,4 +31,9 @@ export interface MedalCount {
   modelId: string;
   gold: number;
   totalScore: number;
+}
+
+export interface CountryMedalCount {
+  origin: 'USA' | 'Chinese';
+  gold: number;
 }
